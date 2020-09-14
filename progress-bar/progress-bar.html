@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress Bar</title>
+  <link rel="stylesheet" href="progress-bar.css" type="text/css"/>
+</head>
+
+<body>
+  <div class="progress-bar">
+    <div class="label" data-count="10">
+    </div>
+    <div class="line">
+      <span class="loading">
+      </span>
+    </div>
+  </div>
+  <div class="progress-bar">
+    <div class="label" data-count="25">
+    </div>
+    <div class="line">
+      <span class="loading">
+      </span>
+    </div>
+  </div>
+  <div class="progress-bar">
+    <div class="label" data-count="30">
+
+    </div>
+    <div class="line">
+      <span class="loading">
+      </span>
+    </div>
+  </div>
+  <div class="progress-bar">
+    <div class="label" data-count="50">
+    </div>
+    <div class="line">
+      <span class="loading">
+      </span>
+    </div>
+  </div>
+  <div class="progress-bar">
+    <div class="label" data-count="60">
+    </div>
+    <div class="line">
+      <span class="loading">
+      </span>
+    </div>
+  </div>
+  <div class="progress-bar">
+    <div class="label" data-count="75">
+    </div>
+    <div class="line">
+      <span class="loading">
+      </span>
+    </div>
+  </div>
+  <div class="progress-bar">
+    <div class="label" data-count="80">
+    </div>
+    <div class="line">
+      <span class="loading">
+      </span>
+    </div>
+  </div>
+  <div class="progress-bar">
+    <div class="label" data-count="100">
+    </div>
+    <div class="line">
+      <span class="loading">
+      </span>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+      var progressBar = document.querySelectorAll(".progress-bar");
+      const time = 2000;
+
+      function caculatorTime(time, dataCount) {
+        return time / dataCount;
+      };
+
+      progressBar.forEach(val => {
+        let label = val.children[0];
+        let line = val.children[1];
+        let dataCount = label.getAttribute("data-count");
+        let loading = line.children[0];
+        let runTime = caculatorTime(time, dataCount);
+        var count = 0;
+        var countTime = 0;
+        let animation = setInterval(() => {
+          if (count < dataCount) {
+            count++;
+            label.innerHTML = count + "%";
+            loading.style.width = count + "%";
+            if (count <= 25) {
+              loading.style.background = "#EBCFB2";
+            }
+            else if (count <= 50) {
+              loading.style.background = "#F9DB6D";
+            }
+            else if (count <= 75) {
+              loading.style.background = "#7DDF64";
+            }
+            else if (count <= 100) {
+              loading.style.background = "#ED4D6E";
+            }
+          }
+          countTime++;
+          if (countTime === time) {
+            clearInterval(animation);
+          }
+        }, runTime);
+      })
+    });
+  </script>
+</body>
+
+</html>

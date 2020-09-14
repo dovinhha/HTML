@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>button</title>
+  <style>
+    body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .switch{
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100px;
+      height: 50px;
+      background-color: darkgrey;
+      border-radius: 50px;
+      border: 1px darkgray solid;
+      position: relative;
+      outline: none;
+      transition: 200ms;
+    }
+
+    .switch:checked{
+      background-color: darkgreen;
+      border: 1px solid darkgreen;
+    }
+
+    .switch:before{
+      content: '';
+      width: 46px;
+      height: 46px;
+      background-color:#fff;
+      border: 1px solid darkgray;
+      position:absolute;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      transition: 200ms;
+    }
+
+    .switch:checked:before{
+      left: 49px;
+      transition: 200ms;
+    }
+  </style>
+</head>
+<body>
+  <input class="switch" type="checkbox"/>
+  <input class="switch" type="checkbox"/>
+  <input class="switch" type="checkbox"/>
+  <input class="switch" type="checkbox"/>
+  <input class="switch" type="checkbox"/> 
+</body>
+</html>

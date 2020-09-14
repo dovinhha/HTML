@@ -1,0 +1,104 @@
+body {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background: black;
+}
+body section {
+  width: 60vh;
+  height: 60vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  animation: animationReact 4s linear infinite;
+}
+body section div {
+  position: absolute;
+}
+body section div:nth-child(4) {
+  border-radius: 50%;
+  width: 10vh;
+  height: 10vh;
+  background: #AB92BF;
+  animation: animationCircle 2s linear infinite;
+}
+body section div:nth-child(1) {
+  width: 60vh;
+  height: 60vh;
+  border-radius: 100%;
+  animation: animationRotate-1 3s linear infinite;
+  border-top: 15px solid #AB92BF;
+  border-left: 15px solid #AB92BF;
+}
+body section div:nth-child(2) {
+  width: 60vh;
+  height: 60vh;
+  border-radius: 100%;
+  animation: animationRotate-2 3s linear infinite;
+  border-top: 15px solid #AB92BF;
+  border-left: 15px solid #AB92BF;
+}
+body section div:nth-child(3) {
+  width: 60vh;
+  height: 60vh;
+  border-radius: 100%;
+  animation: animationRotate-3 3s linear infinite;
+  border-top: 15px solid #AB92BF;
+  border-left: 15px solid #AB92BF;
+}
+
+@keyframes animationRotate-1 {
+  0% {
+    transform: rotateZ(120deg) rotateX(70deg) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(120deg) rotateX(70deg) rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+  0%,20%,40%,60%,80%,100% {
+    box-shadow: -10px -10px 20px #AB92BF;
+  }
+}
+@keyframes animationRotate-2 {
+  0% {
+    transform: rotateZ(240deg) rotateX(70deg) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(240deg) rotateX(70deg) rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+  0%,20%,40%,60%,80%,100% {
+    box-shadow: -10px -10px 20px #AB92BF;
+  }
+}
+@keyframes animationRotate-3 {
+  0% {
+    transform: rotateZ(360deg) rotateX(70deg) rotateX(0deg) rotateY(0deg)  rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg) rotateX(70deg) rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+  0%,20%,40%,60%,80%,100% {
+    box-shadow: -10px -10px 20px #AB92BF;
+  }
+}
+@keyframes animationCircle {
+  10%,30%,50%,70%,90% {
+    transform: scale(0.8);
+    box-shadow: 0px 0px 0px #AB92BF;
+  }
+  0%,20%,40%,60%,80%,100% {
+    transform: scale(1);
+    box-shadow: 0px 0px 20px #AB92BF;
+  }
+}
+@keyframes animationReact {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

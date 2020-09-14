@@ -1,0 +1,92 @@
+body {
+  background: rgb(37,37,52);
+  background: linear-gradient(45deg, rgba(37,37,52,1) 0%, rgba(17,25,70,1) 50%, rgba(58,6,94,1) 100%);
+  height : 100vh;
+  display : flex;
+  flex-direction : column;
+  justify-content : start;
+  align-items : center;
+  overflow : hidden;
+  font-family: 'Grandstander', cursive;
+  margin : 0;
+  padding : 0;
+}
+
+.rocket {
+  width :  200px;
+  position : absolute;
+  left  : 0;
+  top : 55%;
+  transform : rotate(45deg);
+  animation : animationRocket 10s infinite;
+  user-select: none;
+}
+
+.star {
+  width : 5px;
+  z-index:-1;
+  position : absolute;
+  height : 5px;
+  border-radius:50%;
+  animation : animationStar 6s infinite;
+}
+
+.content {
+  font-size : 70px;
+  margin-top : 50px;
+  color : #F49D6E;
+  font-weight: bold;
+}
+
+p{
+  color : #F5D6BA;
+  font-weight : 300;
+}
+
+button {
+  background : #A40E4C;
+  border : none;
+  padding : 10px 12px;
+  border-radius : 5px;
+  outline : none;
+  cursor : pointer;
+  transition : .2s;
+  color : #2C2C54;
+  font-weight : bold;
+  font-family: 'Grandstander', cursive; 
+}
+
+button:active {
+  transform : translate(-5px,5px);
+}
+
+button:hover {
+  background : #A40E3C;
+}
+
+@keyframes animationRocket {
+  0%{
+    left:-160px;
+  }
+  100%{
+    top :55%;
+    left : 110%;
+  }
+}
+
+@keyframes animationStar {
+  0%{
+    box-shadow : 0px 0px 5px #FFF;
+  }
+  50%{
+    box-shadow : 0px 0px 15px #FFF;
+  }
+  100%{
+    box-shadow : 0px 0px 5px #FFF;
+  }
+}
+
+::selection{
+  color : #FFF;
+  background: rgb(37,37,52);
+}

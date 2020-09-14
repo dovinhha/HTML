@@ -1,0 +1,113 @@
+body {
+  height : 100vh;
+  margin : 0;
+  padding : 0;
+  display : flex;
+  justify-content : space-around;
+  align-items : center;
+  overflow : hidden;
+  flex-direction : column;
+}
+
+.preload {
+  display : grid;
+  grid-template-columns : repeat(3,80px);
+  grid-template-rows : repeat(3,80px);
+  grid-gap : 5px;
+  animation : animationRotate 8s infinite linear;
+ }
+ 
+ .preload div {
+   width : 100%;
+   height : 100%;
+   animation : animationScale 2s infinite linear;
+   transform : scale(0);
+ }
+ 
+ .preload:nth-child(2) div {
+   border-radius : 50%;
+ }
+ 
+ .preload > div:nth-child(1) {
+   background : #F49D6E;
+   animation-delay : 0s;
+ }
+ 
+ .preload > div:nth-child(2),.preload > div:nth-child(4) {
+   background : #F5D6BA;
+   animation-delay : 0.2s;
+ }
+  
+ .preload > div:nth-child(3),.preload > div:nth-child(5),.preload > div:nth-child(7) {
+   background : #ACC3A6;
+   animation-delay : 0.4s;
+ }
+ 
+ .preload > div:nth-child(6),.preload > div:nth-child(8) {
+   background : #2C2C54;
+   animation-delay : 0.8s;
+ }
+ 
+  .preload > div:nth-child(9) {
+   background : #A40E4C;
+   animation-delay : 1s;
+ }
+ 
+ .preload:nth-child(2) > div:nth-child(1) {
+   background : #8EA604;
+ }
+ 
+ .preload:nth-child(2) > div:nth-child(2),.preload:nth-child(2) > div:nth-child(4) {
+   background : #F5BB00;
+ }
+  
+ .preload:nth-child(2) div:nth-child(3),.preload:nth-child(2) > div:nth-child(5),.preload:nth-child(2) > div:nth-child(7) {
+   background : #EC9F05;
+ }
+ 
+ .preload:nth-child(2) > div:nth-child(6),.preload:nth-child(2) > div:nth-child(8) {
+   background : #D76A03;
+ }
+ 
+  .preload:nth-child(2) > div:nth-child(9) {
+   background : #BF3100;
+ }
+ 
+ @keyframes animationScale {
+   0%,100% {
+     transform : scale(0);
+   }
+   20%,80%{
+     transform : scale(1);
+   }
+ }
+ 
+ @keyframes animationRotate {
+   0%{
+     transform : rotate(0deg);
+   }
+   20%{
+     transform : rotate(0deg);
+   }
+   25%{
+     transform : rotate(90deg);
+   }
+   45%{
+     transform : rotate(90deg);
+   }
+   50%{
+     transform : rotate(180deg);
+   }
+   70%{
+     transform : rotate(180deg);
+   }
+   75%{
+     transform : rotate(270deg);
+   }
+   95%{
+     transform : rotate(270deg);
+   }
+   100% {
+     transform : rotate(360deg);
+   }
+ }

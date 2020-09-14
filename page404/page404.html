@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="page404.css" type="text/css">
+  <link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@100&display=swap" rel="stylesheet">
+  <title>404</title>
+</head>
+
+<body>
+  <div class="rocket">
+    <img src="https://image.flaticon.com/icons/svg/610/610290.svg" />
+  </div>
+  <div class="content">
+    404!
+  </div>
+  <p>
+    The Page You'r Looking For Was Not Found
+  </p>
+  <button>
+    Go Back
+  </button>
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+      var arrayColor = ["##451146", "#461119", "#114646", "#164611", "#464511"];
+      var body = document.body;
+      setInterval(createStar, 200);
+      function createStar() {
+        var right = Math.floor(Math.random() * 500);
+        var top = Math.floor(Math.random() * screen.height);
+        var star = document.createElement("div");
+        star.classList.add("star");
+        body.appendChild(star);
+        setInterval(runStar, 50);
+        star.style.top = top + "px";
+        star.style.background = arrayColor[Math.floor(Math.random() * 5)];
+        function runStar() {
+          if (right >= screen.width)
+            star.remove();
+          right += 10;
+          star.style.right = right + "px";
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

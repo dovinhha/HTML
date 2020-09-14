@@ -1,0 +1,38 @@
+body {
+  height : 100vh;
+  display : flex;
+  justify-content : space-around;
+  align-items : center;
+  font-family : sans-serif;
+  flex-direction : column;
+  user-select: none;
+  margin: 0;
+  padding: 0;
+}
+
+.progress-bar {
+  display : flex;
+  border-radius : 10px;
+  flex-direction : column;
+}
+
+.label{
+  font-size : 25px;
+}
+
+.line {
+  width : 600px;
+  height : 10px;
+  background : rgba(0,0,0,.2);
+  border-radius : 10px;
+  position : relative;
+}
+
+.line .loading {
+  height : 100%;
+  top : 0;
+  left : 0;
+  position  :absolute;
+  border-radius : 10px;
+  background : #B6C649;
+}

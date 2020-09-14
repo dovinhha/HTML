@@ -1,0 +1,96 @@
+body{
+  padding : 0;
+  margin : 0;
+  display : flex;
+  flex-direction : row;
+  justify-content : center;
+  align-items : center;
+  height : 100vh;
+  font-size: 0px;
+  background:#fce5cd;
+}
+
+section {
+  display  : grid;
+  grid-template-columns : repeat(25,5px);
+  grid-template-rows : repeat(55,5px);
+}
+
+div{
+  width: 100%;
+  height: 100%;
+}
+
+.black{
+  background : #000;
+}
+
+.blue1{
+  background : #00f4fd;
+}
+
+.blue2{
+  background : #008388;
+}
+
+.blue3{
+  background : #000e88;
+}
+
+.blue4{
+  background : #010050;
+}
+
+.red{
+  background : #A40E4C;
+}
+
+.gray{
+  background : #ACC3A6;
+}
+
+.yellow1{
+  background : #fffb00;
+}
+
+.yellow2{
+  background : #b5b200
+}
+
+.yellow3{
+  background : #4b4a00;
+}
+
+.purple1{
+  background : #4682B4;
+}
+.purple2{
+  background : #191970;
+}
+
+.orange1{
+  background : #fb9b00;
+}
+
+.orange2{
+  background : #cd7e00;
+}
+.orange3{
+  background : #7f4e01;
+}
+
+.brown1{
+  background : 	#F5DEB3;
+}
+
+.brown2{
+  background : 	#DEB887;
+}
+
+.brown3{
+  background : 	#8B4513;
+}
+
+.animate__animated.animate__bounce {
+  --animate-duration: 5s;
+}

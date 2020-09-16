@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="snowCanvas.css" type="text/css" />
+  <title>Snow Canvas</title>
+</head>
+
+<body>
+  <canvas></canvas>
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+      let canvas = document.querySelector('canvas');
+      let c = canvas.getContext('2d');
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      document.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+
+      function Snow() {
+        this.radius = Math.random() * 4 + 1;
+        this.x = Math.floor(Math.random() * canvas.width);
+        this.y = -this.radius;
+        this.color = '#FFF'
+        this.velocity = {
+          x: Math.random() * 4 - 2,
+          y: Math.random() * 4
+        }
+      };
+
+      Snow.prototype.draw = function (c) {
+        c.beginPath();
+        c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        c.fillStyle = this.color;
+        c.shadowColor = this.color;
+        c.shadowBlur = 30;
+        c.fill();
+        c.closePath();
+      }
+
+      Snow.prototype.update = function (c) {
+        this.x += this.velocity.x;
+        this.y += this.velocity.y;
+        if (this.y >= canvas.height - this.radius) {
+          this.velocity.y = 0;
+        }
+        this.draw(c);
+      }
+
+      let arraySnow = [];
+
+      function init() {
+        for (let i = 0; i < 1; i++) {
+          arraySnow.push(new Snow);
+        }
+      }
+
+      function animate() {
+        window.requestAnimationFrame(animate);
+        c.clearRect(0, 0, canvas.width, canvas.height);
+        if (arraySnow.length > 800)
+          arraySnow.splice(0, 1);
+        init();
+        arraySnow.forEach((snow) => {
+          snow.update(c);
+        });
+      }
+
+      animate();
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+body {
+  overflow : hidden;
+  height : 100vh;
+  padding : 0;
+  margin : 0;
+  background :  #242d3e;
+  background-image: url(http://pngimg.com/uploads/mountain/mountain_PNG30.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

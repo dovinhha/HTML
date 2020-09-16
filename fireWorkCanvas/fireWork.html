@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="fireWork.css" type="text/css" />
+  <title>Fire Work</title>
+</head>
+
+<body>
+  <canvas></canvas>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+	let canvas = document.querySelector('canvas');
+  let c = canvas.getContext('2d');
+  canvas.width= window.innerWidth;
+  canvas.height = window.innerHeight;
+  document.addEventListener('resize', () => {
+  	canvas.width = window.innerWidth;
+  	canvas.height = window.innerHeight;
+  });
+  
+  let arrayColor = [
+  	'#FF0000',
+    '#00FF00',
+    '#0000FF',
+    '#FFFF00',
+    '#00FFFF',
+    '#FF00FF',
+    '#A40E4C',
+    '#2C2C54',
+    '#F5D6BA',
+    '#F49D6E',
+    '#DCB8CB'
+  ];
+  
+  let arraySpark = []; 
+  
+  function fireWork() {
+  	this.radius = Math.random()*3+1;
+  	this.x = canvas.width/2;
+    this.y = canvas.height+ this.radius;
+    this.color = arrayColor[Math.floor(Math.random()*arrayColor.length)];
+    this.velocity = {
+    	x : Math.random()*6-3,
+      y : Math.random()*2+2
+    };
+    this.maxY = Math.random()*canvas.height/4+canvas.height/10;
+    this.life = false;
+  };
+  
+  fireWork.prototype.draw = function(c) {
+  	c.beginPath();
+    c.arc(this.x,this.y,this.radius,0,2*Math.PI);
+    c.fillStyle = this.color;
+    c.fill();
+    c.closePath();
+  };
+  
+  fireWork.prototype.update = function(c) {
+  	this.y -= this.velocity.y;
+    this.x += this.velocity.x;
+    this.maximumY();
+    this.draw(c);
+  }
+  
+  function spark(x,y,radius,color) {
+  	this.x = x;
+    this.y = y;
+    this.radius = radius/2;
+    this.color = color;
+    this.velocity = {
+    	x : Math.random()*6-3,
+      y : Math.random()*3-1
+    }
+    this.life = 150;
+    this.friction = 0.015;
+  }
+  
+  fireWork.prototype.maximumY = function(c){
+  	if(this.y <= this.maxY || this.x <= 0 || this.x >= canvas.width) {
+    	this.life = true;
+      for(let i = 1 ;i  <= 15 ; i++){
+      	arraySpark.push(new spark(this.x,this.y,this.radius,this.color));
+      }
+    }
+  };
+  
+  spark.prototype.draw = function(c) {
+  	c.beginPath();
+    c.arc(this.x,this.y,this.radius,0,2*Math.PI);
+    c.fillStyle = this.color;
+    c.fill();
+    c.closePath();
+  }
+  
+  spark.prototype.update = function(c) {
+  	this.velocity.y -= this.friction;
+    this.life -= 1;
+  	this.x += this.velocity.x;
+    this.y -= this.velocity.y;
+    this.draw(c);
+  }
+  
+  let arrayFW = [];
+  
+  function init() {
+  	if(arrayFW.length <= 20){
+    	for(let i = 0 ; i < 1 ; i++){
+    	arrayFW.push(new fireWork());
+    	};
+    };
+  };
+  
+  function animate() {
+  	window.requestAnimationFrame(animate);
+    c.fillStyle = 'rgba(0,0,0,.1)';
+    c.fillRect(0,0,canvas.width,canvas.height);
+    init();
+    arrayFW.forEach((FW,index) => {
+    	FW.update(c);
+    	if(FW.life){
+      	arrayFW.splice(index,1);
+      }
+    });
+    arraySpark.forEach((s,index) => {
+    	s.update(c);
+      if(s.life<=0){
+      	arraySpark.splice(index,1);
+      }
+    })
+  }
+  
+  animate();
+  
+});
+  </script>
+</body>
+
+</html>

@@ -9,132 +9,183 @@
 </head>
 
 <body>
-  <canvas></canvas>
+  <p>Happy New Year</p>
+  <div class="option">
+    <button id="resetConfig">Reset Config</button>
+    <div>
+      <input id="size" type="range" min="1" max="8" step="0.1" value="3" />
+      <label for="size">Size</label>
+    </div>
+    <div>
+      <input id="quantity" type="range" min="1" max="40" step="1" value="30" />
+      <label for="quantity">Quantity</label>
+    </div>
+    <div>
+      <input id="fill" type="range" min="1" max="5" step="1" value="1" />
+      <label for="fill">Fill</label>
+    </div>
+  </div>
+  <audio style="display:none" preload="auto" autoplay id="audio" controls source src="https://aredir.nixcdn.com/Unv_Audio71/HappyNewYear-ABBA-1595921.mp3?st=g1zQ-Zu8tL--3qjPlRIq6w&amp;e=1546353858">
+  </audio>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-	let canvas = document.querySelector('canvas');
-  let c = canvas.getContext('2d');
-  canvas.width= window.innerWidth;
-  canvas.height = window.innerHeight;
-  document.addEventListener('resize', () => {
-  	canvas.width = window.innerWidth;
-  	canvas.height = window.innerHeight;
-  });
-  
-  let arrayColor = [
-  	'#FF0000',
-    '#00FF00',
-    '#0000FF',
-    '#FFFF00',
-    '#00FFFF',
-    '#FF00FF',
-    '#A40E4C',
-    '#2C2C54',
-    '#F5D6BA',
-    '#F49D6E',
-    '#DCB8CB'
-  ];
-  
-  let arraySpark = []; 
-  
-  function fireWork() {
-  	this.radius = Math.random()*3+1;
-  	this.x = canvas.width/2;
-    this.y = canvas.height+ this.radius;
-    this.color = arrayColor[Math.floor(Math.random()*arrayColor.length)];
-    this.velocity = {
-    	x : Math.random()*6-3,
-      y : Math.random()*2+2
-    };
-    this.maxY = Math.random()*canvas.height/4+canvas.height/10;
-    this.life = false;
-  };
-  
-  fireWork.prototype.draw = function(c) {
-  	c.beginPath();
-    c.arc(this.x,this.y,this.radius,0,2*Math.PI);
-    c.fillStyle = this.color;
-    c.fill();
-    c.closePath();
-  };
-  
-  fireWork.prototype.update = function(c) {
-  	this.y -= this.velocity.y;
-    this.x += this.velocity.x;
-    this.maximumY();
-    this.draw(c);
-  }
-  
-  function spark(x,y,radius,color) {
-  	this.x = x;
-    this.y = y;
-    this.radius = radius/2;
-    this.color = color;
-    this.velocity = {
-    	x : Math.random()*6-3,
-      y : Math.random()*3-1
-    }
-    this.life = 150;
-    this.friction = 0.015;
-  }
-  
-  fireWork.prototype.maximumY = function(c){
-  	if(this.y <= this.maxY || this.x <= 0 || this.x >= canvas.width) {
-    	this.life = true;
-      for(let i = 1 ;i  <= 15 ; i++){
-      	arraySpark.push(new spark(this.x,this.y,this.radius,this.color));
+      var audio = document.querySelector('#audio');
+      audio.play();
+      let canvas = document.createElement('canvas');
+      let c = canvas.getContext('2d');
+      document.body.appendChild(canvas);
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      document.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+
+      let reset = document.querySelector('#resetConfig');
+      let size = document.querySelector('#size');
+      let quantity = document.querySelector('#quantity');
+      let fill = document.querySelector('#fill');
+
+      let config = {
+        size : 3,
+        quantity : 30,
+        fill : '.'+1
       }
-    }
-  };
-  
-  spark.prototype.draw = function(c) {
-  	c.beginPath();
-    c.arc(this.x,this.y,this.radius,0,2*Math.PI);
-    c.fillStyle = this.color;
-    c.fill();
-    c.closePath();
-  }
-  
-  spark.prototype.update = function(c) {
-  	this.velocity.y -= this.friction;
-    this.life -= 1;
-  	this.x += this.velocity.x;
-    this.y -= this.velocity.y;
-    this.draw(c);
-  }
-  
-  let arrayFW = [];
-  
-  function init() {
-  	if(arrayFW.length <= 20){
-    	for(let i = 0 ; i < 1 ; i++){
-    	arrayFW.push(new fireWork());
-    	};
-    };
-  };
-  
-  function animate() {
-  	window.requestAnimationFrame(animate);
-    c.fillStyle = 'rgba(0,0,0,.1)';
-    c.fillRect(0,0,canvas.width,canvas.height);
-    init();
-    arrayFW.forEach((FW,index) => {
-    	FW.update(c);
-    	if(FW.life){
-      	arrayFW.splice(index,1);
+
+      reset.addEventListener('click', () => {
+        config.size = 3;
+        config.quantity = 30;
+        config.fill = '.'+1;
+        size.value = 3;
+        quantity.value = 30;
+        fill.value = 1;
+      });
+
+      size.addEventListener('change', () => {
+        config.size = size.value;
+      });
+
+      quantity.addEventListener('change', () => {
+        config.quantity = quantity.value;
+      });
+
+      fill.addEventListener('change', () => {
+        config.fill = '.'+fill.value;
+      });
+
+      let arrayColor = [
+        '#ff0000',
+        '#ff6a00',
+        '#ffb700',
+        '#feff00',
+        '#1bff00',
+        '#00fffc',
+        '#000eff',
+        '#f700ff',
+        '#ff00a8',
+        '#00ffc0'
+      ];
+
+      let arraySpark = [];
+
+      function fireWork() {
+        this.radius = Math.random() * config.size + 1;
+        this.x = canvas.width / 2;
+        this.y = canvas.height + this.radius + 100;
+        this.color = arrayColor[Math.floor(Math.random() * arrayColor.length)];
+        this.velocity = {
+          x: Math.random() * 6 - 3,
+          y: Math.random() * 2 + 2
+        };
+        this.maxY = Math.random() * canvas.height / 4 + canvas.height / 10;
+        this.life = false;
+      };
+
+      fireWork.prototype.draw = function (c) {
+        c.beginPath();
+        c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        c.fillStyle = this.color;
+        c.fill();
+        c.closePath();
+      };
+
+      fireWork.prototype.update = function (c) {
+        this.y -= this.velocity.y;
+        this.x += this.velocity.x;
+        this.maximumY();
+        this.draw(c);
       }
+
+      function spark(x, y, radius, color) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius / 2;
+        this.color = color;
+        this.velocity = {
+          x: Math.random() * 6 - 3,
+          y: Math.random() * 3 - 1
+        }
+        this.life = 150;
+        this.friction = 0.015;
+      }
+
+      fireWork.prototype.maximumY = function (c) {
+        if (this.y <= this.maxY || this.x <= 0 || this.x >= canvas.width) {
+          this.life = true;
+          for (let i = 1; i <= 15; i++) {
+            arraySpark.push(new spark(this.x, this.y, this.radius, this.color));
+          }
+        }
+      };
+
+      spark.prototype.draw = function (c) {
+        c.beginPath();
+        c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        c.fillStyle = this.color;
+        c.fill();
+        c.closePath();
+      }
+
+      spark.prototype.update = function (c) {
+        this.velocity.y -= this.friction;
+        this.life -= 1;
+        this.x += this.velocity.x;
+        this.y -= this.velocity.y;
+        this.draw(c);
+      }
+
+      let arrayFW = [];
+
+      function init() {
+        if (arrayFW.length < config.quantity) {
+          for (let i = 0; i < 1; i++) {
+            arrayFW.push(new fireWork());
+          };
+        };
+      };
+
+      function animate() {
+        window.requestAnimationFrame(animate);
+        c.fillStyle = `rgba(0,0,0,${config.fill})`;
+        c.fillRect(0, 0, canvas.width, canvas.height);
+        arrayFW.forEach((FW, index) => {
+          FW.update(c);
+          if (FW.life) {
+            arrayFW.splice(index, 1);
+          }
+        });
+        arraySpark.forEach((s, index) => {
+          s.update(c);
+          if (s.life <= 0) {
+            arraySpark.splice(index, 1);
+          }
+        });
+        init();
+      }
+
+      animate();
+
     });
-    arraySpark.forEach((s,index) => {
-    	s.update(c);
-      if(s.life<=0){
-      	arraySpark.splice(index,1);
-      }
-    })
-  }
-  
-  animate();
-  
-});
   </script>
 </body>
 

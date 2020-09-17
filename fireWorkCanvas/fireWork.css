@@ -4,4 +4,88 @@ body {
   margin : 0;
   padding : 0;
   background : rgb(223,248,235);
+  font-family: sans-serif;
+  user-select: none;
+}
+
+p {
+  position: fixed;
+  top: 50%;
+  font-size: 60px;
+  color:rgba(255,255,255,.15);
+  text-align: center;
+  width: 100%;
+}
+
+.option {
+  position: absolute;
+  left : 40px;
+  bottom : 60px;
+}
+
+button {
+  padding: 8px 10px;
+  border-radius: 5px;
+  background: #A40E4C;
+  border: 1px solid #000;
+  color : #F5D6BA;
+  transition: .2s;
+  outline: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #860138;
+  color : #f5b277;
+}
+
+button:active {
+  transform: translate(-3px,3px);
+}
+
+div label {
+  color : #F49D6E;
+}
+
+input[type="range"]{
+  -webkit-appearance: none;
+  appearance: none;
+  height: 5px;
+  border-radius: 10px;
+  width: 200px;
+  margin-top: 20px;
+  background-image:linear-gradient(60deg ,#ff0000,#ff6a00,#ffb700,#feff00,#1bff00,#00fffc,#000eff,#f700ff,#ff00a8,#00ffc0);
+  outline: none;
+  cursor: pointer;
+  border: 1px solid white;
+  background-size:400%;
+  animation: animationBackground 20s infinite;
+}
+
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -1px;
+  border-radius: 50%;
+  background-image:linear-gradient(45deg ,#ff0000,#ff6a00,#ffb700,#feff00,#1bff00,#00fffc,#000eff,#f700ff,#ff00a8,#00ffc0);
+  border: 1px solid white;
+  box-shadow: 0px 0px 5px 2px #FFF;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb:active{
+  background:white;
+}
+
+@keyframes animationBackground{
+  0%{
+    background-position: 0 0;
+  }
+  50%{
+    background-position: 300% 0;
+  }
+  100%{
+    background-position: 0 0;
+  }
 }

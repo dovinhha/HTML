@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="mouseCanvas.css" type="text/css">
+  <title>Mouse Canvas</title>
+</head>
+
+<body>
+  <h1>Click the screen</h1>
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+      let canvas = document.createElement("canvas");
+      let c = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      document.body.appendChild(canvas);
+
+      let mouse = {
+        x: undefined,
+        y: undefined
+      }
+
+      canvas.addEventListener('mousemove', (event) => {
+        mouse.x = event.clientX;
+        mouse.y = event.clientY;
+      });
+
+      let count = 0;
+
+      document.addEventListener('click', () => {
+        count++;
+      })
+
+      let arrayColor = [
+        '#ff0000',
+        '#ff6a00',
+        '#ffb700',
+        '#feff00',
+        '#1bff00',
+        '#00fffc',
+        '#000eff',
+        '#f700ff',
+        '#ff00a8',
+        '#00ffc0'
+      ];
+
+      function circle(x, y) {
+        this.x = x;
+        this.y = y;
+        this.radius = Math.random() * 3 + 1;
+        this.color = arrayColor[Math.floor(Math.random() * arrayColor.length)];
+        this.velocity = {
+          x: Math.random() * 4 - 2,
+          y: Math.random() * 4 - 2
+        };
+        this.life = 60;
+      }
+
+      circle.prototype.draw = function (c) {
+        c.beginPath();
+        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        c.fillStyle = this.color;
+        c.fill();
+        c.closePath();
+      };
+
+      circle.prototype.update = function (c) {
+        this.x += this.velocity.x;
+        this.y += this.velocity.y;
+        this.life -= 1;
+        this.draw(c);
+      }
+
+      let arrayCircle = [];
+
+      function init() {
+        for (let i = 0; i < 10; i++) {
+          arrayCircle.push(new circle(mouse.x, mouse.y));
+        }
+      }
+
+      function animate() {
+        window.requestAnimationFrame(animate);
+        c.fillStyle = 'rgba(0,0,0,.1)';
+        if (count % 2 == 0) {
+          c.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        else {
+          c.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        init();
+        arrayCircle.forEach((val, index) => {
+          if (val.life <= 0) {
+            arrayCircle.splice(index, 1);
+          }
+          val.update(c);
+        })
+      }
+
+      animate();
+
+    })
+  </script>
+</body>
+
+</html>

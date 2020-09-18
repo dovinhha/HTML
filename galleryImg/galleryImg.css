@@ -1,0 +1,175 @@
+body {
+  background : #FFF;
+  margin : 0;
+  padding : 0;
+  display : flex;
+  justify-content : center;
+  font-family : sans-serif;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  height: 200px;
+  background: rgba(0,0,0,.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.header > .say-hi {
+  font-size: 60px;
+  font-weight: 300;
+  color: rgba(0,0,0,.5);
+}
+
+.container > .box > div > img {
+  width : 100%;
+  height : 100%;
+  border-radius : 50%;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.container > .box > div > img:active {
+  transform: translate(0,5px);
+}
+
+.container {
+  display : flex;
+  flex-direction : row;
+  flex-wrap : wrap;
+  align-items : center;
+  justify-content : center;
+  width : 80%;
+  margin-top : 20px;
+}
+
+.container > .box {
+  flex : auto;
+  box-sizing : border-box;
+  padding : 0px 10px;
+  transition : .2s;
+  display : flex;
+  justify-content : center;
+  flex-direction : column;
+  align-items : center;
+  border : 1px solid rgba(0,0,0,.2);
+}
+
+.container > .box > div:nth-child(1) {
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  width : 150px;
+  height : 150px;
+  margin-top : 10px;
+}
+
+.container > .box:hover {
+  box-shadow : 0px 0px 10px 2px rgba(0,0,0,.4);
+}
+
+.container > .box:hover div img {
+  animation : animationImg 1s;
+}
+
+.box .name {
+  font-size : 30px;
+  margin-top : 10px;
+}
+
+.box .title {
+  font-weight : 300;
+  color : rgba(0,0,0,.4);
+  margin-top : 0;
+  font-size : 14px;
+}
+
+.box .contact {
+  font-size : 30px;
+  margin-top : 10px;
+  margin-bottom : 10px;
+  color : #B4DC7F;
+}
+
+.contact i:hover {
+  animation : animationIcon .2s;
+  cursor : pointer;
+}
+
+@keyframes animationIcon{
+  0% {
+    transform : rotate(0deg);
+  }
+  25%{
+    transform : rotate(-90deg);
+  }
+  50%{
+    transform :rotate(-180deg);
+  }
+  75%{
+    transform : rotate(-270deg);
+  }
+  100%{
+    transform :rotate(-360deg);
+  }
+}
+
+@keyframes animationImg{
+  0%{
+    width : 100%;
+    height : 100%;
+  }
+  25%{
+    width : 100%;
+    height : 50%;
+  }
+  50%{
+    width : 100%;
+    height : 100%;
+  }
+  75%{
+    width : 100%;
+    height : 50%;
+  }
+  100%{
+    width : 100%;
+    height : 100%;
+  }
+}
+
+@media (max-width:600px){
+  .container > .box{
+    width : 100%;
+  }
+  .header > .say-hi{
+    font-size: 30px;
+  }
+}
+
+@media (min-width:601px){
+  .container > .box{
+    width : calc(100% / 2);
+  }
+}
+
+@media (min-width:768px){
+  .container > .box{
+    width : calc(100% / 3);
+  }
+}
+
+@media (min-width:992px){
+  .container > .box{
+    width : calc(100% / 4);
+  }
+}
+
+@media (min-width:1200px){
+  .container > .box{
+    width : calc(100% / 6);
+  }
+}
